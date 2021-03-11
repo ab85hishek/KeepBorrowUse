@@ -7,7 +7,7 @@ class Product {
   final double price;
   final String imageUrl;
   bool isFavorite;
-  
+
   Product({
     @required this.id,
     @required this.title,
@@ -15,5 +15,5 @@ class Product {
     @required this.price,
     @required this.imageUrl,
     this.isFavorite = false,
-  })
+  });
 }
