@@ -51,11 +51,13 @@ class ProductsOverviewScreen extends StatelessWidget {
         itemBuilder: (ctx, i) => ProductItem(
           loadedProducts[i].id,
           loadedProducts[i].title,
+          loadedProducts[i]
+              .price, //done for showing the price on card of products
           loadedProducts[i].imageUrl,
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
+          childAspectRatio: 1 / 2, //changed from 3/2
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
