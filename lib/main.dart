@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'KeepBorrowUse',
         theme: ThemeData(
           primarySwatch: Colors.purple,
