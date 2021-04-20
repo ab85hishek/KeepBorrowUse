@@ -8,6 +8,7 @@ import './edit_product_screen.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
