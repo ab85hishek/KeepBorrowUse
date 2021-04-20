@@ -42,6 +42,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void _updateImageUrl() {
     if (!_imageUrlFocusNode.hasFocus) {
+      if ((!_imageUrlController.text.startsWith('http') &&
+              !_imageUrlController.text.startsWith('https')) ||
+          (!_imageUrlController.text.endsWith('.png') &&
+              !_imageUrlController.text.endsWith('.jpg') &&
+              !_imageUrlController.text.endsWith('.jpeg'))) {
+        return;
+      }
       setState(() {});
     }
   }
@@ -109,7 +116,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please provide a valid price.';
+                      return 'Please enter a price.';
+                    }
+                    if (double.tryParse(value) == null) {
+                      return 'Please enter a valid price.';
+                    }
+                    if (double.parse(value) <= 0) {
+                      return 'Please enter a number greater than 0';
                     }
                     return null;
                   },
@@ -131,6 +144,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Please provide the description.';
+                    }
+                    if (value.length < 10) {
+                      return 'Should be atleast 10 characters long.';
                     }
                     return null;
                   },
@@ -181,7 +197,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         },
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Please provide a valid url.';
+                            return 'Please provide an image URL.';
+                          }
+                          if (!value.startsWith('http') &&
+                              !value.startsWith('https')) {
+                            return 'Please enter a valid URL.';
+                          }
+                          if (!value.endsWith('.png') &&
+                              !value.endsWith('.jpg') &&
+                              !value.endsWith('.jpeg')) {
+                            return 'Please enter a valid URL';
                           }
                           return null;
                         },
