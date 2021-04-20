@@ -47,6 +47,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void _saveForm() {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
     _form.currentState.save();
     print(_editedProduct.title);
     print(_editedProduct.description);
@@ -79,6 +83,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_priceFocusNode);
                   },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please provide a valid title.';
+                    }
+                    return null;
+                  },
                   onSaved: (value) {
                     _editedProduct = Product(
                       id: null,
@@ -97,6 +107,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_descriptionFocusNode);
                   },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please provide a valid price.';
+                    }
+                    return null;
+                  },
                   onSaved: (value) {
                     _editedProduct = Product(
                       id: null,
@@ -112,6 +128,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   maxLines: 3,
                   keyboardType: TextInputType.multiline,
                   focusNode: _descriptionFocusNode,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please provide the description.';
+                    }
+                    return null;
+                  },
                   onSaved: (value) {
                     _editedProduct = Product(
                       id: null,
@@ -156,6 +178,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         focusNode: _imageUrlFocusNode,
                         onFieldSubmitted: (_) {
                           _saveForm();
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please provide a valid url.';
+                          }
+                          return null;
                         },
                         onSaved: (value) {
                           _editedProduct = Product(
